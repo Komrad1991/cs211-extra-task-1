@@ -97,6 +97,7 @@ double to_24_hour_clock(double hours)
         with integer and fractional part of a hours separately.
         
     */
+    assert(hours >= 0);
     return hours >= 24 ? hours - (floor(hours/24)*24) : hours;
 
 }
@@ -111,7 +112,7 @@ double to_24_hour_clock(double hours)
 
     >>> get_hours(3800)
     1
-
+    
     >>> get_minutes(3800)
     3
 
@@ -121,6 +122,23 @@ double to_24_hour_clock(double hours)
     In other words, if 3800 seconds have elapsed since midnight, 
     it is currently 01:03:20 (hh:mm:ss).
 */
+
+double get_hours(double seconds)
+{
+    double hours = floor(seconds / 3600);
+    return hours >= 24? hours - floor(hours / 24) * 24 : hours;
+}
+
+double get_minutes(double seconds)
+{
+    double minutes = floor(seconds / 60);
+    return minutes >= 60? minutes - floor(minutes / 60)*60 : minutes;
+}
+
+double get_seconds(double seconds)
+{
+    return seconds >= 60 ? seconds - floor(seconds / 60) * 60 : seconds;
+}
 
 double time_to_utc(int utc_offset, double time)
 {
@@ -148,7 +166,17 @@ double time_to_utc(int utc_offset, double time)
         >>> time_to_utc(-1, 23.0)
         0.0
     */
-    return 0;
+    assert(utc_offset >= -12 && utc_offset <= 14);
+    double hours = time - utc_offset;
+    if (hours > 24)
+    {
+        hours = hours - floor(hours / 24) * 24;
+    }
+    else if (hours < 0)
+    {
+        hours = 24 + hours;
+    }
+    return hours;
 
 }
 
