@@ -1,4 +1,6 @@
 #include "extra-task-1.h"
+#include <assert.h>
+#include <math.h>
 
 double seconds_difference(double time_1, double time_2)
 {
@@ -62,6 +64,8 @@ double to_float_hours(int hours, int minutes, int seconds)
         >>> to_float_hours(1, 0, 36)
         1.01
     */
+    assert(minutes >= 0 && minutes < 60);
+    assert(seconds >= 0 && seconds < 60);
     return hours + (static_cast<double>(minutes)/60) + (static_cast<double>(seconds) / 3600);
 
 }
@@ -93,7 +97,7 @@ double to_24_hour_clock(double hours)
         with integer and fractional part of a hours separately.
         
     */
-    return 0;
+    return hours >= 24 ? hours - (floor(hours/24)*24) : hours;
 
 }
 
