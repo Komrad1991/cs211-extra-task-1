@@ -166,9 +166,10 @@ double time_to_utc(int utc_offset, double time)
         >>> time_to_utc(-1, 23.0)
         0.0
     */
+    assert(time >= 0 && time < 24);
     assert(utc_offset >= -12 && utc_offset <= 14);
     double hours = time - utc_offset;
-    if (hours > 24)
+    if (hours >= 24)
     {
         hours = hours - floor(hours / 24) * 24;
     }
