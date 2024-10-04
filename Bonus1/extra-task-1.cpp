@@ -62,7 +62,7 @@ double to_float_hours(int hours, int minutes, int seconds)
         >>> to_float_hours(1, 0, 36)
         1.01
     */
-    return 0;
+    return hours + (static_cast<double>(minutes)/60) + (static_cast<double>(seconds) / 3600);
 
 }
 
