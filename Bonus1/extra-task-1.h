@@ -15,3 +15,5 @@ double get_minutes(double seconds);
 double get_seconds(double seconds);
 
 double time_to_utc(int utc_offset, double time);
+
+double time_from_utc(int utc_offset, double time);
